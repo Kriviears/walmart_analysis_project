@@ -1,0 +1,43 @@
+version: 1
+
+sources:
+  - name: walmart_data
+    database: WALMART_ANALYSIS
+    schema: PUBLIC
+    tables:
+      - name: DEPARTMENT_SOURCE
+        columns:
+          - name: Store
+            tests:
+              - not_null
+          - name: Dept
+          - name: Date
+          - name: Weekly_Sales
+          - name: IsHoliday
+      - name: STORES_SOURCE
+        columns:
+          - name: Store
+            tests:
+              - unique
+              - not_null
+          - name: Type
+          - name: Size
+      - name: FACT_SOURCE
+        columns:
+          - name: Store
+            tests:
+              - relationships:
+                  arguments:
+                    to: ref('STORES_SOURCE')
+                    field: Store
+          - name: Date
+          - name: Temperature
+          - name: Fuel_Price
+          - name: MarkDown1
+          - name: MarkDown2
+          - name: MarkDown3
+          - name: MarkDown4
+          - name: MarkDown5
+          - name: CPI
+          - name: Unemployment
+          - name: IsHoliday
