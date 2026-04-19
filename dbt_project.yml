@@ -47,3 +47,6 @@ models:
     BRONZE:
       +materialized: table
       +schema: bronze
+    SILVER:
+      +materialized: table
+      +schema: silver

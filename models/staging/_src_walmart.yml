@@ -28,8 +28,8 @@ sources:
             tests:
               - relationships:
                   arguments:
-                    to: ref('STORES_SOURCE')
-                    field: Store
+                    to: ref('stg_stores')
+                    field: store_id
           - name: Date
           - name: Temperature
           - name: Fuel_Price

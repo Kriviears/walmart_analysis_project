@@ -1,0 +1,73 @@
+version: 1
+
+sources:
+  - name: walmart_data
+    database: WALMART_ANALYSIS
+    schema: DBT_KRIVIEARS_SILVER
+    tables:
+      - name: silver_departments
+        columns:
+          - name: Store_id
+            tests:
+              - not_null
+          - name: Department_id
+            tests:
+              - not_null
+          - name: Date
+            tests:
+              - not_null
+          - name: Weekly_Sales
+            tests:
+              - not_null
+          - name: is_holiday
+            tests:
+              - not_null
+      - name: silver_facts
+        columns:
+          - name: Store_id
+            tests:
+              - relationships:
+                  arguments:
+                    to: ref('bronze_stores')
+                    field: store_id
+          - name: Date
+            tests:
+              - not_null
+          - name: Temperature
+            tests:
+              - not_null
+          - name: Fuel_Price
+            tests:
+              - not_null
+          - name: MarkDown1
+            tests:
+              - not_null
+          - name: MarkDown2
+            tests:
+              - not_null
+          - name: MarkDown3
+            tests:
+              - not_null
+          - name: MarkDown4
+            tests:
+              - not_null
+          - name: MarkDown5
+            tests:
+              - not_null
+          - name: CPI
+          - name: Unemployment
+          - name: is_holiday
+            tests:
+              - not_null
+      - name: silver_stores
+        columns:
+          - name: Store_id
+            tests:
+              - unique
+              - not_null
+          - name: store_Type
+            tests:
+              - not_null
+          - name: store_Size
+            tests:
+              - not_null
