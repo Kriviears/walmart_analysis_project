@@ -71,3 +71,4 @@ sources:
           - name: store_Size
             tests:
               - not_null
+      - name: silver_dates
