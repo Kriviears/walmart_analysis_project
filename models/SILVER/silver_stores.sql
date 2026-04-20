@@ -7,6 +7,7 @@ FROM {{ ref('bronze_stores')}}
 )
 SELECT
     *
+    ,current_timestamp AS Insert_date
 FROM  TypesCasted
 WHERE Store_id IS NOT NULL
     AND Store_type IS NOT NULL

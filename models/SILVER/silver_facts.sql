@@ -28,7 +28,29 @@ SELECT
     ,Unemployment
     ,CASE WHEN is_holiday = TRUE THEN 1 ELSE 0 END AS is_holiday
 FROM TypesCasted
+), Weekly_Sales_table AS(
+SELECT
+    Store_id
+    ,Department_id
+    ,Date
+    ,Weekly_sales AS Store_Weekly_Sales
+FROM {{ ref('silver_departments')}}
 )
 SELECT
-    *
-FROM HandleNulls
+    H.Store_id
+    ,Department_id
+    ,Store_Weekly_Sales
+    ,H.Date
+    ,Fuel_price
+    ,Temperature AS Store_Temperature
+    ,Unemployment
+    ,CPI
+    ,Markdown1
+    ,Markdown2
+    ,Markdown3
+    ,Markdown4
+    ,Markdown5
+FROM HandleNulls H
+Right JOIN Weekly_Sales_table W
+    ON H.store_id = W.store_id
+    AND H.date = W.date
